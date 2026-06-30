@@ -15,8 +15,14 @@ provider "aws" {
   skip_metadata_api_check     = true
   skip_requesting_account_id  = true
 
-  # Force S3 to use path-style addressing (http://localhost:4566/bucket-name)
-  # instead of virtual-hosted style to prevent local DNS routing errors.
+
+# Skip validation for local emulator
+  skip_credentials_validation = true
+  skip_metadata_api_check     = true
+  skip_requesting_account_id  = true
+  skip_region_validation      = true
+
+  # Force S3 to use path-style addressing
   s3_use_path_style           = true
 
   # Redirect all cloud resource API destinations straight to Floci
