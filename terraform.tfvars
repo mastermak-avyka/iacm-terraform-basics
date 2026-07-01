@@ -1,4 +1,4 @@
-resource_name = "iacm-poc1-demo-bucket"
+resource_name = "iacm-poc1-bucket"
 region        = "eu-central-1"
 
 #aws_access_key_id     = "<+secrets.getValue(\"aws_state_access_key\")>"
