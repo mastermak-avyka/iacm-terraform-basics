@@ -12,7 +12,13 @@ provider "aws" {
   access_key = var.aws_access_key_id
   secret_key = var.aws_secret_access_key
 
-  # WARNING: Hard-coding credentials is acceptable for this POC but is NOT a
-  # production best practice. In Harness IACM, store these in Harness Secrets
-  # Manager or use OIDC-based AWS authentication instead.
+  # NOTE: If the variables above are null, the AWS provider automatically uses
+  # the AWS_ACCESS_KEY_ID / AWS_SECRET_ACCESS_KEY environment variables or the
+  # default AWS credentials chain. In Harness IACM, set these as pipeline
+  # variables pointing to Harness secrets:
+  #
+  #   aws_access_key_id     = <+secrets.getValue("aws_state_access_key")>
+  #   aws_secret_access_key = <+secrets.getValue("aws_state_secret_key")>
+  #
+  # For production, prefer OIDC-based AWS authentication over long-lived keys.
 }

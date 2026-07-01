@@ -1,8 +1,12 @@
 resource_name = "iacm-poc1-demo-bucket-2026"
 region        = "us-east-1"
 
-aws_access_key_id     = "AKIARRGVETA7P4JSJPQ6"
-aws_secret_access_key = "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"
+# AWS credentials are intentionally NOT set here.
+# In Harness IACM, configure them as pipeline secrets/variables:
+#   aws_access_key_id     = <+secrets.getValue("aws_state_access_key")>
+#   aws_secret_access_key = <+secrets.getValue("aws_state_secret_key")>
+# For local testing, set AWS_ACCESS_KEY_ID and AWS_SECRET_ACCESS_KEY
+# environment variables before running Terraform.
 
 tags = {
   Environment = "POC"

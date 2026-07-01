@@ -10,15 +10,17 @@ variable "region" {
 }
 
 variable "aws_access_key_id" {
-  description = "AWS access key ID for authentication"
+  description = "AWS access key ID for authentication. If null, the AWS provider falls back to the AWS_ACCESS_KEY_ID environment variable or the default credentials chain."
   type        = string
   sensitive   = true
+  default     = null
 }
 
 variable "aws_secret_access_key" {
-  description = "AWS secret access key for authentication"
+  description = "AWS secret access key for authentication. If null, the AWS provider falls back to the AWS_SECRET_ACCESS_KEY environment variable or the default credentials chain."
   type        = string
   sensitive   = true
+  default     = null
 }
 
 variable "tags" {

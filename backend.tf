@@ -1,17 +1,22 @@
 terraform {
   backend "s3" {
-    bucket     = "iacm-poc1-terraform-state"
-    key        = "iacm/poc1/terraform.tfstate"
-    region     = "us-east-1"
-    access_key = "AKIARRGVETA7P4JSJPQ6"
-    secret_key = "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"
+    bucket = "iacm-poc1-terraform-state"
+    key    = "iacm/poc1/terraform.tfstate"
+    region = "us-east-1"
 
-    # WARNING: Hard-coding long-lived AWS credentials is NOT recommended for
-    # production. In Harness IACM, configure AWS authentication via Harness
-    # Secrets or OIDC instead.
+    # NOTE: AWS credentials for the backend are intentionally NOT hard-coded
+    # here. In Harness IACM, supply them in the pipeline's
+    # "Backend Configuration" section using Harness secret expressions:
+    #
+    #   access_key = <+secrets.getValue("aws_state_access_key")>
+    #   secret_key = <+secrets.getValue("aws_state_secret_key")>
+    #
+    # For local testing only, you can set AWS_ACCESS_KEY_ID and
+    # AWS_SECRET_ACCESS_KEY environment variables or run the Floci local
+    # backend described in README.md.
 
     # Enable state locking with DynamoDB (optional but recommended).
-    # dynamodb_table = "terraform-locks-us-east-1"
+    # dynamodb_table = "iacm-poc1-terraform-locks"
 
     # Server-side encryption for state at rest.
     encrypt = true

@@ -6,10 +6,30 @@ This Terraform configuration provisions a single AWS S3 bucket.
 
 ### 1. Real AWS (default — used by Harness IACM)
 
-By default, `provider.tf` and `backend.tf` are configured for real AWS:
+By default, `provider.tf` and `backend.tf` are configured for real AWS.
+State is stored in `s3://iacm-poc1-terraform-state/iacm/poc1/terraform.tfstate`.
 
-- Credentials are read from `terraform.tfvars`.
-- State is stored in `s3://iacm-poc1-terraform-state/iacm/poc1/terraform.tfstate`.
+#### Harness IACM secret configuration
+
+1. Create two Harness secrets:
+   - `aws_state_access_key`
+   - `aws_state_secret_key`
+
+2. In the IACM pipeline **Backend Configuration** section, set:
+
+   ```text
+   access_key = <+secrets.getValue("aws_state_access_key")>
+   secret_key = <+secrets.getValue("aws_state_secret_key")>
+   ```
+
+3. In the IACM pipeline **Variables** section, set:
+
+   ```text
+   aws_access_key_id     = <+secrets.getValue("aws_state_access_key")>
+   aws_secret_access_key = <+secrets.getValue("aws_state_secret_key")>
+   ```
+
+   These variables are passed to the AWS provider in `provider.tf`.
 
 ### 2. Local Floci emulator (for local testing only)
 
