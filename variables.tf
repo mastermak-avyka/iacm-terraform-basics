@@ -9,6 +9,18 @@ variable "region" {
   default     = "us-east-1"
 }
 
+variable "aws_access_key_id" {
+  description = "AWS access key ID for authentication"
+  type        = string
+  sensitive   = true
+}
+
+variable "aws_secret_access_key" {
+  description = "AWS secret access key for authentication"
+  type        = string
+  sensitive   = true
+}
+
 variable "tags" {
   description = "A map of tags to apply to the provisioned resources"
   type        = map(string)
