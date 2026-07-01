@@ -1,5 +1,5 @@
 resource_name = "iacm-poc1-demo-bucket-2026"
-region        = "us-east-1"
+region        = "eu-central-1"
 
 # AWS credentials are intentionally NOT set here.
 # In Harness IACM, configure them as pipeline secrets/variables:
