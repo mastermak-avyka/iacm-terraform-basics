@@ -8,9 +8,10 @@ terraform {
 }
 
 locals {
-  # Use the WSL host IP and the published Floci port so both local Terraform
-  # and Dockerized Harness IaCM plugin can reach the local emulator.
-  floci_endpoint = "http://172.30.221.193:14566"
+  # Use the Docker bridge gateway IP and the published Floci port.
+  # 172.17.0.1 is the default docker0 gateway from which any Docker
+  # container (including the Harness IaCM plugin) can reach the host.
+  floci_endpoint = "http://172.17.0.1:14566"
 }
 
 provider "aws" {

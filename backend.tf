@@ -6,8 +6,8 @@ terraform {
     access_key                  = "test"
     secret_key                  = "test"
     
-    # 1. Route traffic out of the Docker container to your host machine
-    endpoint                    = "http://172.30.221.193:14566"
+    # 1. Route traffic out of the Docker container via the docker0 gateway
+    endpoint                    = "http://172.17.0.1:14566"
     
     # 2. Force path-style addressing (required by Terraform <= 1.5.x / Harness IaCM)
     force_path_style            = true
