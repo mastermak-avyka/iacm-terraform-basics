@@ -7,16 +7,18 @@ terraform {
   }
 }
 
+locals {
+  # Use the WSL host IP and the published Floci port so both local Terraform
+  # and Dockerized Harness IaCM plugin can reach the local emulator.
+  floci_endpoint = "http://172.30.221.193:14566"
+}
+
 provider "aws" {
   region                      = var.region
   access_key                  = "test"
   secret_key                  = "test"
-  skip_credentials_validation = true
-  skip_metadata_api_check     = true
-  skip_requesting_account_id  = true
 
-
-# Skip validation for local emulator
+  # Skip validation for local emulator
   skip_credentials_validation = true
   skip_metadata_api_check     = true
   skip_requesting_account_id  = true
@@ -27,13 +29,13 @@ provider "aws" {
 
   # Redirect all cloud resource API destinations straight to Floci
   endpoints {
-    apigateway     = "http://localhost:4566"
-    cloudwatch     = "http://localhost:4566"
-    dynamodb       = "http://localhost:4566"
-    iam            = "http://localhost:4566"
-    lambda         = "http://localhost:4566"
-    s3             = "http://localhost:4566"
-    sns            = "http://localhost:4566"
-    sqs            = "http://localhost:4566"
+    apigateway     = local.floci_endpoint
+    cloudwatch     = local.floci_endpoint
+    dynamodb       = local.floci_endpoint
+    iam            = local.floci_endpoint
+    lambda         = local.floci_endpoint
+    s3             = local.floci_endpoint
+    sns            = local.floci_endpoint
+    sqs            = local.floci_endpoint
   }
 }

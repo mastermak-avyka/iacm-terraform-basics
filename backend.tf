@@ -7,11 +7,10 @@ terraform {
     secret_key                  = "test"
     
     # 1. Route traffic out of the Docker container to your host machine
-    endpoint                    = "http://172.30.221.193:4566"
+    endpoint                    = "http://172.30.221.193:14566"
     
-    # 2. Force path-style addressing (both arguments included to cover all TF versions)
+    # 2. Force path-style addressing
     use_path_style              = true
-    force_path_style            = true 
     
     # 3. Skip AWS validations
     skip_credentials_validation = true
