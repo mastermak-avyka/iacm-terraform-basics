@@ -7,7 +7,7 @@ terraform {
     secret_key                  = "test"
     
     # 1. Route traffic out of the Docker container to your host machine
-    endpoint                    = "http://host.docker.internal:4566"
+    endpoint                    = "http://172.17.0.1:4566"
     
     # 2. Force path-style addressing (both arguments included to cover all TF versions)
     use_path_style              = true
