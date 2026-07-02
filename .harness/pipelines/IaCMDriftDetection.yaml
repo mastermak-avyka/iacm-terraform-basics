@@ -1,0 +1,37 @@
+pipeline:
+  name: IaCM-Drift-Detection
+  identifier: IaCMDriftDetection
+  projectIdentifier: mak_playground
+  orgIdentifier: playground
+  tags: {}
+  stages:
+    - stage:
+        name: Drift
+        identifier: Drift
+        description: ""
+        type: IACM
+        spec:
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          workspace: terraform_basics_dev
+          execution:
+            steps:
+              - step:
+                  type: IACMOpenTofuPlugin
+                  name: init
+                  identifier: init
+                  timeout: 10m
+                  spec:
+                    command: init
+              - step:
+                  type: IACMOpenTofuPlugin
+                  name: detectDrift
+                  identifier: detectDrift
+                  timeout: 10m
+                  spec:
+                    command: detect-drift
+        tags: {}
